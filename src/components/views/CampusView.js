@@ -6,26 +6,47 @@ It constructs a React component to display a single campus and its students (if 
 ================================================== */
 import { Link } from "react-router-dom";
 
-// Take in props data to construct the component
 const CampusView = (props) => {
-  const {campus} = props;
-  
-  // Render a single Campus view with list of its students
+  const { campus, handleDeleteCampus, handleRemoveStudent } = props;
+
   return (
     <div>
       <h1>{campus.name}</h1>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
-      {campus.students.map( student => {
-        let name = student.firstname + " " + student.lastname;
-        return (
+
+      <img src={campus.imageUrl} alt={campus.name} width="300" />
+
+      <br /><br />
+
+      {/* Edit + Delete buttons */}
+      <Link to={`/edit-campus/${campus.id}`}>
+        <button>Edit Campus</button>
+      </Link>
+      <button onClick={() => handleDeleteCampus(campus.id)}>Delete Campus</button>
+
+      <br /><br />
+
+      {/* Add New Student */}
+      <Link to="/newstudent">
+        <button>Add New Student</button>
+      </Link>
+
+      <h2>Enrolled Students:</h2>
+
+      {campus.students.length ? (
+        campus.students.map((student) => (
           <div key={student.id}>
             <Link to={`/student/${student.id}`}>
-              <h2>{name}</h2>
-            </Link>             
+              <h3>{student.firstname} {student.lastname}</h3>
+            </Link>
+            <button onClick={() => handleRemoveStudent(student.id)}>Remove from Campus</button>
+            <hr />
           </div>
-        );
-      })}
+        ))
+      ) : (
+        <p>No students are currently enrolled at this campus.</p>
+      )}
     </div>
   );
 };
