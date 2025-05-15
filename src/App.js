@@ -11,7 +11,8 @@ import {
   AllStudentsContainer,
   NewStudentContainer,
   AddCampusContainer,
-  EditCampusContainer
+  EditCampusContainer,
+  EditStudentContainer
 } from './components/containers';
 
 // if you create separate components for adding/editing 
