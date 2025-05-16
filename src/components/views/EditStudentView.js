@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 const EditStudentView = ({ handleChange, handleSubmit, student }) => {
   if (!student) return <p>Loading...</p>;
@@ -26,11 +26,38 @@ const EditStudentView = ({ handleChange, handleSubmit, student }) => {
         />
         <br /><br />
 
+        <label>Email: </label>
+        <input
+          type="email"
+          name="email"
+          value={student.email || ''}
+          onChange={handleChange}
+        />
+        <br /><br />
+
+        <label>GPA: </label>
+        <input
+          type="text"
+          name="gpa"
+          value={student.gpa || ''}
+          onChange={handleChange}
+        />
+        <br /><br />
+
+        <label>Image URL: </label>
+        <input
+          type="text"
+          name="imageUrl"
+          value={student.imageUrl || ''}
+          onChange={handleChange}
+        />
+        <br /><br />
+
         <label>Campus ID: </label>
         <input
           type="text"
           name="campusId"
-          value={student.campusId || ""}
+          value={student.campusId || ''}
           onChange={handleChange}
         />
         <br /><br />

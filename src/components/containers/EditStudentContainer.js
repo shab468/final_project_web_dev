@@ -9,15 +9,13 @@ class EditStudentContainer extends Component {
     super(props);
     this.state = {
       student: null,
-      redirect: false
     };
   }
 
   async componentDidMount() {
     const studentId = this.props.match.params.id;
     await this.props.fetchStudent(studentId);
-    const { student } = this.props;
-    this.setState({ student: { ...student } });
+    this.setState({ student: { ...this.props.student } });
   }
 
   handleChange = (event) => {
@@ -31,14 +29,7 @@ class EditStudentContainer extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
     const { student } = this.state;
-
-    if (!student.firstname.trim() || !student.lastname.trim()) {
-      alert("First and last name are required.");
-      return;
-    }
-
     await this.props.editStudent(student);
     this.props.history.push(`/student/${student.id}`);
   };
